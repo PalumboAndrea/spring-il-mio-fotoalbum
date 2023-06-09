@@ -14,11 +14,13 @@
 		<h2 th:if="${foto.size() == 0}">Nessuna foto trovata</h2>
 		
 		<ul th:if="${foto != null}" class="list-unstyled">
-			<li th:each="foto : ${foto}" th:object="${foto}" class="my-1" th:if="${foto.visibile}">
-				<a th:href="@{/foto/{id} (id=*{id})}">[[ *{titolo} ]]</a>
-				<span>
-					[[ *{descrizione} ]]
-				</span>
+			<li th:each="foto : ${foto}" th:object="${foto}" class="my-2">
+				<div>
+					<a th:href="@{/foto/{id} (id=*{id})}">[[ *{titolo} ]]</a>
+					<span>
+						[[ *{descrizione} ]]
+					</span>
+				</div>
 				<img style="width: 400px;" alt="foto" th:src="*{url}">
 				<a
 					th:href="@{/admin/foto/update/{id} (id=*{id})}"
@@ -30,12 +32,17 @@
 					class="btn btn-danger"
 					th:text="Elimina"
 				></a>
+				<span th:if="${!foto.visibile}" style="color: red;">
+					Questa foto è invisibile agli altri utenti
+				</span>
 			</li>
 		</ul>
 		
-		<a th:href="@{/admin/foto/create}" class="btn btn-primary">Crea una nuova foto!</a>
+		<div class="d-flex justify-content-center mt-4">
+			<a th:href="@{/admin/foto/create}" class="btn btn-success me-2">Crea una nuova foto!</a>
 		
-		<a th:href="@{/admin/categorie/index}" class="btn btn-primary">Visualizza le categorie!</a>
+			<a th:href="@{/admin/categorie/index}" class="btn btn-primary">Visualizza le categorie!</a>
+		</div>
 		
 	</body>
 </html>
