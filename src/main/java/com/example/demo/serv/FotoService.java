@@ -30,7 +30,7 @@ public class FotoService {
 		return fotoRepo.findById(id);
 	}
 	
-	public void deletePizza(Foto foto) {
+	public void deleteFoto(Foto foto) {
 		
 		fotoRepo.delete(foto);
 	}

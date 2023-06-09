@@ -77,7 +77,7 @@ public class FotoController {
 	}
 	
 	@GetMapping("/foto/update/{id}")
-	public String editPizza(
+	public String editFoto(
 			Model model,
 			@PathVariable int id
 		) {
@@ -90,7 +90,7 @@ public class FotoController {
 	}
 	
 	@PostMapping("/foto/update/{id}")
-	public String updatePizza(
+	public String updateFoto(
 			Model model,
 			@PathVariable int id,
 			@Valid @ModelAttribute Foto foto,
@@ -110,6 +110,18 @@ public class FotoController {
 		
 		foto.setId(id);
 		fotoService.save(foto);
+		
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/foto/delete/{id}")
+	public String deleteFoto(
+			@PathVariable Integer id
+		) {
+		
+		Optional<Foto> optFoto = fotoService.findById(id);
+		Foto foto = optFoto.get();
+		fotoService.deleteFoto(foto);
 		
 		return "redirect:/home";
 	}
