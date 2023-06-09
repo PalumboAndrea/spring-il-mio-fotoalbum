@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Cerca la foto</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid">
+	
+		<th:block th:replace="fragments :: searchForm()"></th:block>
+	
+		<h2 th:if="${foto.size() == 0}">Nessuna foto trovata</h2>
+		
+		<div th:if="${foto.size() != 0}">
+			
+			<h2>Ecco le foto che ho trovato per te:</h2>
+		
+			<ul>
+				<li th:each="foto : ${foto}" th:object="${foto}">
+					<a th:href="@{/foto/{id} (id=*{id})}">[[ *{titolo} ]]</a>
+				</li>
+			</ul>	
+		
+		</div>
+
+		<a th:replace="fragments :: backHome()"></a>
+	
+	</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Categorie</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid">
+	
+		<h1 class="text-center">Elenco categorie:</h1>
+		
+		<h2 th:if="${categorie.size() == 0}">Nessuna categoria trovata</h2>
+		
+		<ul th:if="${categorie != null}" class="list-unstyled">
+			<li th:each="categoria : ${categorie}" th:object="${categoria}" class="my-1">
+				<span>
+					[[ *{nome} ]]
+				</span>
+				<a
+					th:href="@{/admin/categoria/update/{id} (id=*{id})}"
+					class="btn btn-warning"
+					th:text="Modifica"
+				></a>
+				<a
+					th:href="@{/admin/categoria/delete/{id} (id=*{id})}"
+					class="btn btn-danger"
+					th:text="Elimina"
+				></a>
+			</li>
+		</ul>
+		
+		<form class="row g-3" method="POST">
+		
+		  <div class="col-12">
+		    <label for="userEmail" class="form-label">Email</label>
+		    <input type="email" class="form-control" name="email">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('nome')}"
+			>
+				[[ ${errors.getFieldError('nome').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-12 text-center">
+		  	<input type="submit" value="Invia!" class="btn btn-success">
+		  </div>
+		
+		</form>
+		
+		<a th:href="@{/admin/categoria/create}" class="btn btn-primary">Crea una nuova categoria!</a>
+		
+		<a th:replace="fragments :: backHome()"></a>
+		
+	</body>
+</html>

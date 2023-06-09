@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Crea Categoria</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid" th:object="${categoria}">
+		
+		<h1>
+			Crea la tua categoria!
+		</h1>
+		
+		<form class="row g-3" method="POST">
+		
+		  <div class="col-12">
+		    <label for="inputEmail4" class="form-label">Nome</label>
+		    <input type="text" class="form-control" name="nome" th:value="*{nome}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('nome')}"
+			>
+				[[ ${errors.getFieldError('nome').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-12 text-center">
+		  	<input type="submit" value="Creala!" class="btn btn-success">
+		  </div>
+		
+		</form>
+		
+		<a th:replace="fragments :: backHome()"></a>
+	 
+	</body>
+</html>

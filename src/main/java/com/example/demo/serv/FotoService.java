@@ -20,6 +20,11 @@ public class FotoService {
 		return fotoRepo.findAll();
 	}
 	
+	public List<Foto> findByName(String titolo) {
+		
+		return fotoRepo.findByTitoloContaining(titolo);
+	}
+	
 	public Foto save(Foto foto) {
 		
 		return fotoRepo.save(foto);

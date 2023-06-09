@@ -11,7 +11,7 @@
 			Modifica la foto: [[ *{titolo} ]]
 		</h1>
 		
-		<form class="row g-3" th:action="@{/foto/update/{id} (id=*{id})}" method="POST">
+		<form class="row g-3" th:action="@{/admin/foto/update/{id} (id=*{id})}" method="POST">
 		
 		  <div class="col-12">
 		    <label for="inputEmail4" class="form-label">Titolo</label>
@@ -56,10 +56,33 @@
 		  </div>
 		  
 		  <div class="col-12 text-center">
+		  	<label>Categorie:</label>
+			<div
+				th:each="categoria : ${categorie}"
+				th:object="${categoria}"
+			>
+				<input 
+					th:id="${'categoria-' + categoria.id}" 
+					th:value="*{id}"
+					th:checked="${foto.categorie.contains(categoria)}"
+					type="checkbox" 
+					name="categorie"
+				>
+				<label th:for="${'categoria-' + categoria.id}">[[ *{nome} ]]</label>
+				<br>
+			</div>
+		  </div>
+		  
+		  <div class="col-12 text-center">
 		  	<input type="submit" value="Modificala!" class="btn btn-success">
 		  </div>
+		  
+		  
+		  
 		
 		</form>
+		
+		<a th:replace="fragments :: backHome()"></a>
 	 
 	</body>
 </html>

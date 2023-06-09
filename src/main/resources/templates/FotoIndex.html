@@ -7,11 +7,13 @@
 	</head>
 	<body class="container-fluid">
 	
+		<th:block th:replace="fragments :: searchForm()"></th:block>
+	
 		<h1 class="text-center">Elenco foto:</h1>
 		
 		<h2 th:if="${foto.size() == 0}">Nessuna foto trovata</h2>
 		
-		<ul th:if="${foto != null}">
+		<ul th:if="${foto != null}" class="list-unstyled">
 			<li th:each="foto : ${foto}" th:object="${foto}" class="my-1" th:if="${foto.visibile}">
 				<a th:href="@{/foto/{id} (id=*{id})}">[[ *{titolo} ]]</a>
 				<span>
@@ -19,19 +21,21 @@
 				</span>
 				<img style="width: 400px;" alt="foto" th:src="*{url}">
 				<a
-					th:href="@{/foto/update/{id} (id=*{id})}"
+					th:href="@{/admin/foto/update/{id} (id=*{id})}"
 					class="btn btn-warning"
 					th:text="Modifica"
 				></a>
 				<a
-					th:href="@{/foto/delete/{id} (id=*{id})}"
+					th:href="@{/admin/foto/delete/{id} (id=*{id})}"
 					class="btn btn-danger"
 					th:text="Elimina"
 				></a>
 			</li>
 		</ul>
 		
-		<a th:href="@{/foto/create}" class="btn btn-primary">Crea una nuova foto!</a>
+		<a th:href="@{/admin/foto/create}" class="btn btn-primary">Crea una nuova foto!</a>
+		
+		<a th:href="@{/admin/categorie/index}" class="btn btn-primary">Visualizza le categorie!</a>
 		
 	</body>
 </html>
