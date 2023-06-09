@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Modifica Foto</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid" th:object="${foto}">
+		
+		<h1>
+			Modifica la foto: [[ *{titolo} ]]
+		</h1>
+		
+		<form class="row g-3" th:action="@{/foto/update/{id} (id=*{id})}" method="POST">
+		
+		  <div class="col-12">
+		    <label for="inputEmail4" class="form-label">Titolo</label>
+		    <input type="text" class="form-control" name="titolo" th:value="*{titolo}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('titolo')}"
+			>
+				[[ ${errors.getFieldError('titolo').defaultMessage} ]]
+			</label>
+		  </div>
+		   
+		  <div class="col-12">
+		  	<label for="inputEmail4" class="form-label">Descrizione</label>
+		  	<textarea class="form-control" name="descrizione">[[ *{descrizione} ]]</textarea>
+		  	<label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('descrizione')}"
+			>
+				[[ ${errors.getFieldError('descrizione').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-6">
+		    <label for="inputAddress" class="form-label">Url dell'immagine</label>
+		    <input type="text" class="form-control" name="url" th:value="*{url}">
+		    <label 
+				style="color: red"
+				th:if="${errors != null && errors.hasFieldErrors('url')}"
+			>
+				[[ ${errors.getFieldError('url').defaultMessage} ]]
+			</label>
+		  </div>
+		  
+		  <div class="col-6 d-flex align-items-center justify-content-center">
+			  
+			  <div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" role="switch" value="false" name="visibile">
+				  <label class="form-check-label" for="flexSwitchCheckDefault">Non visibile</label>
+			  </div>
+			  
+		  </div>
+		  
+		  <div class="col-12 text-center">
+		  	<input type="submit" value="Modificala!" class="btn btn-success">
+		  </div>
+		
+		</form>
+	 
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Home</title>
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+	</head>
+	<body class="container-fluid">
+	
+		<h1 class="text-center">Elenco foto:</h1>
+		
+		<h2 th:if="${foto.size() == 0}">Nessuna foto trovata</h2>
+		
+		<ul th:if="${foto != null}">
+			<li th:each="foto : ${foto}" th:object="${foto}" class="my-1" th:if="${foto.visibile}">
+				<a th:href="@{/foto/{id} (id=*{id})}">[[ *{titolo} ]]</a>
+				<span>
+					[[ *{descrizione} ]]
+				</span>
+				<img style="width: 400px;" alt="foto" th:src="*{url}">
+				<a
+					th:href="@{/foto/update/{id} (id=*{id})}"
+					class="btn btn-warning"
+					th:text="Modifica"
+				></a>
+				<a
+					th:href="@{/foto/delete/{id} (id=*{id})}"
+					class="btn btn-danger"
+					th:text="Elimina"
+				></a>
+			</li>
+		</ul>
+		
+		<a th:href="@{/foto/create}" class="btn btn-primary">Crea una nuova foto!</a>
+		
+	</body>
+</html>
